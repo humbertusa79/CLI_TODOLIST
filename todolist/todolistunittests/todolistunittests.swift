@@ -20,13 +20,22 @@ final class todolistunittests: XCTestCase {
         XCTAssertFalse(todo.isCompleted)
     }
     
-    func testTodoDescription() {
+    func testIncompleteTodoDescription() {
         let uid = UUID()
         let title = "task 2"
         let todo = makeTodo(id: uid,
                             title: title,
                             isCompleted: false)
         XCTAssertEqual(todo.description, "[❌] \(title)")
+    }
+    
+    func testCompletedTodoDescription(){
+        let uid = UUID()
+        let title = "task 3"
+        let todo = makeTodo(id: uid,
+                            title: title,
+                            isCompleted: true)
+        XCTAssertEqual(todo.description, "[✅] \(title)")
     }
     
     private func makeTodo(id: UUID,
