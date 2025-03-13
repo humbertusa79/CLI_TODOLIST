@@ -38,7 +38,8 @@ final class App: MainLoop {
     }
     
     func run() {
-        while state == .running {
+        repeat {
+            print("enter a command:", terminator: " ")
             let userInput = readUserInput(shouldStripString)
             if let userInput {
                 let command = Commands(rawValue: userInput)
@@ -60,17 +61,17 @@ final class App: MainLoop {
             } else {
                 erroMessage()
             }
-        }
+        } while state == .running
     }
 
     private func erroMessage() {
         let errorMessage = """
-        Please enter a command option: \n"
-            add [task name]
-            list
-            delete [task name]
-            toggle [task index]
-            exit
+        The options are: \n"
+            - add [task name]
+            - list
+            - delete [task name]
+            - toggle [task index]
+            - exit
         """
         print(errorMessage)
     }

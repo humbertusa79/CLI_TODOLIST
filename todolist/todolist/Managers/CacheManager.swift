@@ -18,7 +18,7 @@ final class JSONFileManagerCache: Cache {
     }
     
     func load() -> [Todo]? {
-        
+        return nil
     }
 }
 
@@ -28,6 +28,6 @@ final class InMemoryCache: Cache {
     }
     
     func load() -> [Todo]? {
-        
+        return nil
     }
 }
