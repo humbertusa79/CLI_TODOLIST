@@ -12,3 +12,13 @@ struct Todo {
     let title: String
     var isCompleted: Bool
 }
+
+extension Todo: CustomStringConvertible {
+    var description: String {
+        return "[\(icon)] \(title)"
+    }
+
+    private var icon: String {
+        return isCompleted ? "✅" : "❌"
+    }
+}

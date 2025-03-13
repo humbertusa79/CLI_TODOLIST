@@ -19,18 +19,45 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A778830C2D827CDD002DECDB /* todolistunittests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = todolistunittests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A77883152D827E8B002DECDB /* TestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = TestPlan.xctestplan; path = todolistunittests/TestPlan.xctestplan; sourceTree = "<group>"; };
 		A7D0DDAF2D7CDDF6001D38CA /* todolist */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = todolist; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		A77883142D827D49002DECDB /* Exceptions for "todolist" folder in "todolistunittests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Model/Todo.swift,
+			);
+			target = A778830B2D827CDD002DECDB /* todolistunittests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		A778830D2D827CDD002DECDB /* todolistunittests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = todolistunittests;
+			sourceTree = "<group>";
+		};
 		A7D0DDB12D7CDDF6001D38CA /* todolist */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				A77883142D827D49002DECDB /* Exceptions for "todolist" folder in "todolistunittests" target */,
+			);
 			path = todolist;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		A77883092D827CDD002DECDB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A7D0DDAC2D7CDDF6001D38CA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -44,7 +71,9 @@
 		A7D0DDA62D7CDDF6001D38CA = {
 			isa = PBXGroup;
 			children = (
+				A77883152D827E8B002DECDB /* TestPlan.xctestplan */,
 				A7D0DDB12D7CDDF6001D38CA /* todolist */,
+				A778830D2D827CDD002DECDB /* todolistunittests */,
 				A7D0DDB02D7CDDF6001D38CA /* Products */,
 			);
 			sourceTree = "<group>";
@@ -53,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				A7D0DDAF2D7CDDF6001D38CA /* todolist */,
+				A778830C2D827CDD002DECDB /* todolistunittests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -60,6 +90,28 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		A778830B2D827CDD002DECDB /* todolistunittests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A77883102D827CDD002DECDB /* Build configuration list for PBXNativeTarget "todolistunittests" */;
+			buildPhases = (
+				A77883082D827CDD002DECDB /* Sources */,
+				A77883092D827CDD002DECDB /* Frameworks */,
+				A778830A2D827CDD002DECDB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				A778830D2D827CDD002DECDB /* todolistunittests */,
+			);
+			name = todolistunittests;
+			packageProductDependencies = (
+			);
+			productName = todolistunittests;
+			productReference = A778830C2D827CDD002DECDB /* todolistunittests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		A7D0DDAE2D7CDDF6001D38CA /* todolist */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A7D0DDB62D7CDDF6001D38CA /* Build configuration list for PBXNativeTarget "todolist" */;
@@ -92,6 +144,9 @@
 				LastSwiftUpdateCheck = 1620;
 				LastUpgradeCheck = 1620;
 				TargetAttributes = {
+					A778830B2D827CDD002DECDB = {
+						CreatedOnToolsVersion = 16.2;
+					};
 					A7D0DDAE2D7CDDF6001D38CA = {
 						CreatedOnToolsVersion = 16.2;
 					};
@@ -112,11 +167,29 @@
 			projectRoot = "";
 			targets = (
 				A7D0DDAE2D7CDDF6001D38CA /* todolist */,
+				A778830B2D827CDD002DECDB /* todolistunittests */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		A778830A2D827CDD002DECDB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		A77883082D827CDD002DECDB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A7D0DDAB2D7CDDF6001D38CA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -127,6 +200,34 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		A77883112D827CDD002DECDB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hpx.aisolution.todolistunittests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		A77883122D827CDD002DECDB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hpx.aisolution.todolistunittests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		A7D0DDB42D7CDDF6001D38CA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -266,6 +367,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		A77883102D827CDD002DECDB /* Build configuration list for PBXNativeTarget "todolistunittests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A77883112D827CDD002DECDB /* Debug */,
+				A77883122D827CDD002DECDB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		A7D0DDAA2D7CDDF6001D38CA /* Build configuration list for PBXProject "todolist" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
