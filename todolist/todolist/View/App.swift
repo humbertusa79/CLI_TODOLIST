@@ -12,6 +12,11 @@ protocol MainLoop {
 }
 
 final class App: MainLoop {
+    typealias UserInputResult = (Bool) -> String?
+    private var state: State
+    var readUserInput: UserInputResult
+    private let shouldStripString: Bool
+
     enum Commands: String {
         case add
         case list
@@ -25,10 +30,16 @@ final class App: MainLoop {
         case stop
     }
     
+    init(readUserInput: @escaping UserInputResult,
+         shouldStripString: Bool) {
+        self.readUserInput = readUserInput
+        self.shouldStripString = shouldStripString
+        self.state = .running
+    }
+    
     func run() {
-        var state: State = .running
         while state == .running {
-            let userInput = readUserInput()
+            let userInput = readUserInput(shouldStripString)
             if let userInput {
                 let command = Commands(rawValue: userInput)
                 switch command {
@@ -51,13 +62,25 @@ final class App: MainLoop {
             }
         }
     }
-    
-    private func readUserInput() -> String? {
-        var input = readLine()
-        return input
-    }
-    
+
     private func erroMessage() {
-        print("Please enter a command option: add, list, delete, toggle or exit")
+        let errorMessage = """
+        Please enter a command option: \n"
+            add [task name]
+            list
+            delete [task name]
+            toggle [task index]
+            exit
+        """
+        print(errorMessage)
     }
 }
+
+
+#if DEBUG
+extension App {
+    var currentState: State {
+        return state
+    }
+}
+#endif

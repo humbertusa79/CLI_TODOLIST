@@ -8,7 +8,7 @@
 import XCTest
 @testable import todolist
 
-final class todolistunittests: XCTestCase {
+final class TodoUnitTests: XCTestCase {
     func testTodoModelCreatedWithDefaultInitialValues() {
         let uid = UUID()
         let title = "task 1"
@@ -37,10 +37,12 @@ final class todolistunittests: XCTestCase {
                             isCompleted: true)
         XCTAssertEqual(todo.description, "[✅] \(title)")
     }
-    
-    private func makeTodo(id: UUID,
-                          title: String,
-                          isCompleted: Bool) -> Todo {
+}
+
+extension TodoUnitTests {
+    func makeTodo(id: UUID,
+                  title: String,
+                  isCompleted: Bool) -> Todo {
         return Todo(id: id,
                     title: title,
                     isCompleted: isCompleted)

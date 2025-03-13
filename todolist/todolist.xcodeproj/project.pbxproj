@@ -29,6 +29,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Model/Todo.swift,
+				View/App.swift,
 			);
 			target = A778830B2D827CDD002DECDB /* todolistunittests */;
 		};
