@@ -8,10 +8,10 @@
 import Foundation
 
 protocol TodoDirecting {
-    func getTodos() -> [Todo]?
-    func add(todo: Todo)
+    func listTodos() -> [Todo]?
+    func addTodo(with title: String)
     func toggleCompletion(forTodoAtIndex index: Int)
-    func remove(todoAtIndex index: Int)
+    func deleteTodo(atIndex index: Int)
 }
 
 
