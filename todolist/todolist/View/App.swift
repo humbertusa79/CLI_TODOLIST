@@ -86,9 +86,9 @@ final class App: MainLoop {
     }
     
     private func processInput(input: String) -> (command: String, value: String) {
-        let split = input.split(separator: " ")
+        var split = input.components(separatedBy: " ")
         let command = String(split.first ?? "")
-        let value = String(split.last ?? "")
+        let value = String(split.dropFirst().joined(separator: " "))
         return (command, value)
     }
     
