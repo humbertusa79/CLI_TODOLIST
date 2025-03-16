@@ -21,13 +21,3 @@ final class JSONFileManagerCache: Cache {
         return nil
     }
 }
-
-final class InMemoryCache: Cache {
-    func save(todos: [Todo]) {
-        
-    }
-    
-    func load() -> [Todo]? {
-        return nil
-    }
-}

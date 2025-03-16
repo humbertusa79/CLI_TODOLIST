@@ -18,7 +18,11 @@ final class Node<T> {
 
 
 final class LinkedList<T> {
-    var head: Node<T>?
+    private var head: Node<T>?
+
+    var begin: Node<T>? {
+        return head
+    }
     
     var isEmpty: Bool {
         return head == nil
@@ -54,7 +58,7 @@ extension LinkedList {
         return value
     }
     
-    func deleteNodeAt(index: Int) -> T? {
+    @discardableResult func deleteNodeAt(index: Int) -> T? {
         let nodes = nodeAt(index: index)
         var current = nodes.current
         var before = nodes.before
@@ -68,10 +72,9 @@ extension LinkedList {
         }
         let value = current?.value
         return value
-        
     }
     
-    private func nodeAt(index: Int) -> (current: Node<T>?, before: Node<T>?) {
+    func nodeAt(index: Int) -> (current: Node<T>?, before: Node<T>?) {
         var iterator: Node<T>? = head
         var before: Node<T>? = nil
         var counter = 1

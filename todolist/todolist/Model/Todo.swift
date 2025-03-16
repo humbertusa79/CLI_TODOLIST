@@ -9,7 +9,7 @@ import Foundation
 
 struct Todo: Codable {
     let id: UUID
-    let title: String
+    private(set) var title: String
     var isCompleted: Bool
 }
 
