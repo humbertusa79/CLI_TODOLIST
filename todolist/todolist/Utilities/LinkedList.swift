@@ -10,18 +10,27 @@ import Foundation
 final class Node<T> {
     var value: T
     var next: Node<T>?
-    init(value: T, next: Node<T>?) {
+    var prev: Node<T>?
+    init(value: T,
+         next: Node<T>? = nil,
+         prev: Node<T>? = nil) {
         self.value = value
         self.next = next
+        self.prev = prev
     }
 }
 
 
 final class LinkedList<T> {
     private var head: Node<T>?
+    private var tail: Node<T>?
 
     var begin: Node<T>? {
         return head
+    }
+    
+    var end: Node<T>? {
+        return tail
     }
     
     var isEmpty: Bool {
@@ -30,59 +39,93 @@ final class LinkedList<T> {
     
     init() {
         self.head = nil
+        self.tail = nil
     }
 }
 
 extension LinkedList {
-    func push(value: T) {
-        let newNode = Node(value: value, next: nil)
-        guard !isEmpty else {
-            head = newNode
-            return
-        }
+    func enqueue(value: T) {
+        let newNode = Node(value: value)
         newNode.next = head
+        head?.prev = newNode
         head = newNode
+        if tail == nil {
+            tail = head
+        }
+    }
+
+    func dequeue() -> T? {
+        var node = tail
+        let value = node?.value
+        defer {
+            tail = node?.prev
+            node?.prev?.next = nil
+            node?.prev = node?.next
+            node = nil
+            if tail == nil {
+                head = tail
+            }
+        }
+        return value
     }
     
-    func pop() -> T? {
-        guard !isEmpty else {
-            return nil
-        }
-
+    private func pop() -> T? {
         var node = head
         let value = node?.value
         defer {
-            head = head?.next
+            head = node?.next
+            node?.next?.prev = nil
+            node?.prev = node?.next
             node = nil
+            if head == nil {
+                tail = head
+            }
         }
         return value
     }
     
     @discardableResult func deleteNodeAt(index: Int) -> T? {
-        let nodes = nodeAt(index: index)
-        var current = nodes.current
-        var before = nodes.before
-        if current === head {
+        var node = nodeAt(index: index)
+        
+        if node === tail {
+            return dequeue()
+        }
+        
+        if node === head {
             return pop()
         }
         
+        let value = node?.value
+
         defer {
-            before?.next = current?.next
-            current = nil
+            node?.prev?.next = node?.next
+            node?.next?.prev = node?.prev
+            node?.next = nil
+            node?.prev = node?.next
+            node = nil
         }
-        let value = current?.value
         return value
     }
     
-    func nodeAt(index: Int) -> (current: Node<T>?, before: Node<T>?) {
-        var iterator: Node<T>? = head
-        var before: Node<T>? = nil
+    func traverse(perform: (Int,T?) -> Void) {
+        guard !isEmpty else { return }
+        var iterator: Node<T>? = tail
         var counter = 1
-        while iterator != nil && counter < index {
-            before = iterator
-            iterator = iterator?.next
+        while iterator !== head {
+            perform(counter, iterator?.value)
+            iterator = iterator?.prev
             counter += 1
         }
-        return (iterator, before)
+        perform(counter, iterator?.value)
+    }
+    
+    func nodeAt(index: Int)  -> Node<T>? {
+        var iterator: Node<T>? = tail
+        var counter = 1
+        while iterator !== head && counter < index {
+            iterator = iterator?.prev
+            counter += 1
+        }
+        return iterator
     }
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 protocol TodoDirecting {
-    func listTodos() -> LinkedList<Todo>?
+    func listTodos(action: (Int, Todo?) -> Void)
     func addTodo(with title: String)
     func toggleCompletion(forTodoAtIndex index: Int)
     func deleteTodo(atIndex index: Int)
@@ -16,27 +16,28 @@ protocol TodoDirecting {
 
 
 final class TodoManager {
-    private var todoList: LinkedList<Todo> = LinkedList()
+    private let inMemoryCache = InMemoryCache()
+    private let fileCache = JSONFileManagerCache()
 }
 
 extension TodoManager: TodoDirecting {
-    func listTodos() -> LinkedList<Todo>? {
-        return todoList
+    func listTodos(action:(Int,Todo?) -> Void) {
+        inMemoryCache.load()?.traverse(perform: action)
     }
     
     func addTodo(with title: String) {
         let todo = Todo(id: UUID(), title: title, isCompleted: false)
-        todoList.push(value: todo)
+        inMemoryCache.save(todo: todo)
     }
     
     func toggleCompletion(forTodoAtIndex index: Int) {
-        let node = todoList.nodeAt(index: index)
-        guard let node = node.current else { return }
+        let node = inMemoryCache.load()?.nodeAt(index: index)
+        guard let node else { return }
         node.value.isCompleted = !node.value.isCompleted
     }
     
     func deleteTodo(atIndex index: Int) {
-        todoList.deleteNodeAt(index: index)
+        inMemoryCache.load()?.deleteNodeAt(index: index)
     }
     
 }

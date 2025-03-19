@@ -51,8 +51,7 @@ final class App: MainLoop {
                 case .add:
                     todoManager.addTodo(with: value)
                 case .list:
-                    let todosList = todoManager.listTodos()
-                    list(todos: todosList)
+                    list()
                 case .delete:
                     if let index = Int(value) {
                         todoManager.deleteTodo(atIndex: index)
@@ -86,29 +85,16 @@ final class App: MainLoop {
     }
     
     private func processInput(input: String) -> (command: String, value: String) {
-        var split = input.components(separatedBy: " ")
+        let split = input.components(separatedBy: " ")
         let command = String(split.first ?? "")
         let value = String(split.dropFirst().joined(separator: " "))
         return (command, value)
     }
     
-    private func list(todos: LinkedList<Todo>?) {
-        guard let todos = todos, !todos.isEmpty else {
-            return
+    private func list() {
+        todoManager.listTodos { index, todo in
+            print("\(index) \(todo?.description ?? "")")
         }
-        
-        var iterator = todos.begin
-        var counter = 1
-        while iterator != nil {
-            printTodo(withValue: iterator?.value.description ?? " ",
-                      atIndex: counter)
-            iterator = iterator?.next
-            counter += 1
-        }
-    }
-
-    private func printTodo(withValue value: String, atIndex index: Int) {
-        print("\(index)  \(value)")
     }
 }
 
