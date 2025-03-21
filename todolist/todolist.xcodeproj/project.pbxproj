@@ -19,32 +19,34 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		A778830C2D827CDD002DECDB /* todolistunittests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = todolistunittests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A77883152D827E8B002DECDB /* TestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = TestPlan.xctestplan; path = todolistunittests/TestPlan.xctestplan; sourceTree = "<group>"; };
+		A7CC3A922D8D0AA400EA3E35 /* todolisttests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = todolisttests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7D0DDAF2D7CDDF6001D38CA /* todolist */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = todolist; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		A77883142D827D49002DECDB /* Exceptions for "todolist" folder in "todolistunittests" target */ = {
+		A7CC3AA32D8D0B6E00EA3E35 /* Exceptions for "todolist" folder in "todolisttests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Managers/CacheManager.swift,
+				Managers/TodoManager.swift,
 				Model/Todo.swift,
+				Utilities/LinkedList.swift,
 				View/App.swift,
 			);
-			target = A778830B2D827CDD002DECDB /* todolistunittests */;
+			target = A7CC3A912D8D0AA400EA3E35 /* todolisttests */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		A778830D2D827CDD002DECDB /* todolistunittests */ = {
+		A7CC3A932D8D0AA400EA3E35 /* todolisttests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = todolistunittests;
+			path = todolisttests;
 			sourceTree = "<group>";
 		};
 		A7D0DDB12D7CDDF6001D38CA /* todolist */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				A77883142D827D49002DECDB /* Exceptions for "todolist" folder in "todolistunittests" target */,
+				A7CC3AA32D8D0B6E00EA3E35 /* Exceptions for "todolist" folder in "todolisttests" target */,
 			);
 			path = todolist;
 			sourceTree = "<group>";
@@ -52,7 +54,7 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		A77883092D827CDD002DECDB /* Frameworks */ = {
+		A7CC3A8F2D8D0AA400EA3E35 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -72,9 +74,8 @@
 		A7D0DDA62D7CDDF6001D38CA = {
 			isa = PBXGroup;
 			children = (
-				A77883152D827E8B002DECDB /* TestPlan.xctestplan */,
 				A7D0DDB12D7CDDF6001D38CA /* todolist */,
-				A778830D2D827CDD002DECDB /* todolistunittests */,
+				A7CC3A932D8D0AA400EA3E35 /* todolisttests */,
 				A7D0DDB02D7CDDF6001D38CA /* Products */,
 			);
 			sourceTree = "<group>";
@@ -83,7 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				A7D0DDAF2D7CDDF6001D38CA /* todolist */,
-				A778830C2D827CDD002DECDB /* todolistunittests.xctest */,
+				A7CC3A922D8D0AA400EA3E35 /* todolisttests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -91,26 +92,26 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A778830B2D827CDD002DECDB /* todolistunittests */ = {
+		A7CC3A912D8D0AA400EA3E35 /* todolisttests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A77883102D827CDD002DECDB /* Build configuration list for PBXNativeTarget "todolistunittests" */;
+			buildConfigurationList = A7CC3A982D8D0AA400EA3E35 /* Build configuration list for PBXNativeTarget "todolisttests" */;
 			buildPhases = (
-				A77883082D827CDD002DECDB /* Sources */,
-				A77883092D827CDD002DECDB /* Frameworks */,
-				A778830A2D827CDD002DECDB /* Resources */,
+				A7CC3A8E2D8D0AA400EA3E35 /* Sources */,
+				A7CC3A8F2D8D0AA400EA3E35 /* Frameworks */,
+				A7CC3A902D8D0AA400EA3E35 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				A778830D2D827CDD002DECDB /* todolistunittests */,
+				A7CC3A932D8D0AA400EA3E35 /* todolisttests */,
 			);
-			name = todolistunittests;
+			name = todolisttests;
 			packageProductDependencies = (
 			);
-			productName = todolistunittests;
-			productReference = A778830C2D827CDD002DECDB /* todolistunittests.xctest */;
+			productName = todolisttests;
+			productReference = A7CC3A922D8D0AA400EA3E35 /* todolisttests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		A7D0DDAE2D7CDDF6001D38CA /* todolist */ = {
@@ -145,7 +146,7 @@
 				LastSwiftUpdateCheck = 1620;
 				LastUpgradeCheck = 1620;
 				TargetAttributes = {
-					A778830B2D827CDD002DECDB = {
+					A7CC3A912D8D0AA400EA3E35 = {
 						CreatedOnToolsVersion = 16.2;
 					};
 					A7D0DDAE2D7CDDF6001D38CA = {
@@ -168,13 +169,13 @@
 			projectRoot = "";
 			targets = (
 				A7D0DDAE2D7CDDF6001D38CA /* todolist */,
-				A778830B2D827CDD002DECDB /* todolistunittests */,
+				A7CC3A912D8D0AA400EA3E35 /* todolisttests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		A778830A2D827CDD002DECDB /* Resources */ = {
+		A7CC3A902D8D0AA400EA3E35 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -184,7 +185,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		A77883082D827CDD002DECDB /* Sources */ = {
+		A7CC3A8E2D8D0AA400EA3E35 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -201,31 +202,43 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		A77883112D827CDD002DECDB /* Debug */ = {
+		A7CC3A962D8D0AA400EA3E35 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MACOSX_DEPLOYMENT_TARGET = 15.1;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.hpx.aisolution.todolistunittests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hpx.aisolution.todolisttests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				XROS_DEPLOYMENT_TARGET = 2.2;
 			};
 			name = Debug;
 		};
-		A77883122D827CDD002DECDB /* Release */ = {
+		A7CC3A972D8D0AA400EA3E35 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MACOSX_DEPLOYMENT_TARGET = 15.1;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.hpx.aisolution.todolistunittests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hpx.aisolution.todolisttests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				XROS_DEPLOYMENT_TARGET = 2.2;
 			};
 			name = Release;
 		};
@@ -351,6 +364,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -360,6 +374,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -368,11 +383,11 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A77883102D827CDD002DECDB /* Build configuration list for PBXNativeTarget "todolistunittests" */ = {
+		A7CC3A982D8D0AA400EA3E35 /* Build configuration list for PBXNativeTarget "todolisttests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A77883112D827CDD002DECDB /* Debug */,
-				A77883122D827CDD002DECDB /* Release */,
+				A7CC3A962D8D0AA400EA3E35 /* Debug */,
+				A7CC3A972D8D0AA400EA3E35 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
