@@ -40,6 +40,7 @@ final class App: MainLoop {
     }
     
     func run() {
+        todoManager.loadTodos()
         repeat {
             print("enter a command:", terminator: " ")
             let userInput = readUserInput(shouldStripString)
@@ -61,6 +62,7 @@ final class App: MainLoop {
                         todoManager.toggleCompletion(forTodoAtIndex: index)
                     }
                 case .exit:
+                    todoManager.saveTodos()
                     state = .stop
                 default:
                     erroMessage()

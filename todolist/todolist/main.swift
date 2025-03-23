@@ -17,3 +17,5 @@ func mainRun() {
                   shouldStripString: false)
     app.run()
 }
+
+mainRun()

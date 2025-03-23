@@ -12,6 +12,8 @@ protocol TodoDirecting {
     func addTodo(with title: String)
     func toggleCompletion(forTodoAtIndex index: Int)
     func deleteTodo(atIndex index: Int)
+    func saveTodos()
+    func loadTodos()
 }
 
 
@@ -38,6 +40,16 @@ extension TodoManager: TodoDirecting {
     
     func deleteTodo(atIndex index: Int) {
         inMemoryCache.load()?.deleteNodeAt(index: index)
+    }
+    
+    func saveTodos() {
+        guard let todos = inMemoryCache.load() else { return }
+        fileCache.save(todos: todos)
+    }
+    
+    func loadTodos() {
+        guard let todos = fileCache.load() else { return }
+        inMemoryCache.load(todos: todos)
     }
     
 }
