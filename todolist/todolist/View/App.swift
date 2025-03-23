@@ -17,7 +17,7 @@ final class App: MainLoop {
     var readUserInput: UserInputResult
     private let shouldStripString: Bool
     private var todoManager: TodoDirecting
-
+    
     enum Commands: String {
         case add
         case list
@@ -38,7 +38,9 @@ final class App: MainLoop {
         self.state = .running
         self.todoManager = TodoManager()
     }
-    
+}
+
+extension App {
     func run() {
         todoManager.loadTodos()
         repeat {
@@ -73,15 +75,18 @@ final class App: MainLoop {
             }
         } while state == .running
     }
+}
 
+
+extension App {
     private func erroMessage() {
         let errorMessage = """
         The options are: \n"
-            -  📌 add [task name]
-            -  📝 list
-            -  🗑️ delete [task index]
-            -  🌟 toggle [task index]
-            - exit
+            -  📌) add [task name]
+            -  📝) list
+            -  🗑️) delete [task index]
+            -  🌟) toggle [task index]
+            -  ⛔) exit
         """
         print(errorMessage)
     }
@@ -97,6 +102,10 @@ final class App: MainLoop {
         todoManager.listTodos { index, todo in
             print("\(index) \(todo?.description ?? "")")
         }
+    }
+    
+    private func processCommand(command: String, value: String) throws {
+        
     }
 }
 
