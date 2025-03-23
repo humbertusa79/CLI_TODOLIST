@@ -7,6 +7,24 @@
 
 import Foundation
 
+enum Commands: String {
+    case add
+    case list
+    case delete
+    case toggle
+    case exit
+}
+
+enum CommandError: Error {
+    case addEmptyString
+    case notSupported
+    case deleteIndexOutOfBounds
+    case deleteIndexNaN
+    case toggleIndexOutOfBounds
+    case toggleIndexNaN
+    case emptyList
+}
+
 protocol TodoDirecting {
     func listTodos(action: (Int, Todo?) -> Void)
     func addTodo(with title: String)
@@ -14,6 +32,8 @@ protocol TodoDirecting {
     func deleteTodo(atIndex index: Int)
     func saveTodos()
     func loadTodos()
+    func processCommand(command: Commands?, value: String) throws
+    var count: Int { get }
 }
 
 
@@ -23,6 +43,10 @@ final class TodoManager {
 }
 
 extension TodoManager: TodoDirecting {
+    var count: Int {
+        inMemoryCache.count
+    }
+    
     func listTodos(action:(Int,Todo?) -> Void) {
         inMemoryCache.load()?.traverse(perform: action)
     }
@@ -52,4 +76,39 @@ extension TodoManager: TodoDirecting {
         inMemoryCache.load(todos: todos)
     }
     
+}
+
+extension TodoManager {
+    func processCommand(command: Commands?, value: String) throws {
+        guard let command else { throw CommandError.notSupported }
+        switch command {
+        case .add:
+            guard !value.isEmpty else { throw CommandError.addEmptyString }
+            return
+        
+        case .delete:
+            guard self.count > 0 else { throw CommandError.emptyList }
+            try isValid(value: value, with: [.deleteIndexNaN, .deleteIndexOutOfBounds])
+            return
+            
+        case .toggle:
+            guard self.count > 0 else { throw CommandError.emptyList }
+            try isValid(value: value, with: [.toggleIndexNaN, .toggleIndexOutOfBounds])
+            return
+            
+        case .list:
+            guard self.count > 0 else { throw CommandError.emptyList }
+        case .exit:
+            break
+        }
+    }
+    
+    private func isValid(value: String,
+                         with errors: [CommandError]) throws {
+        let index = Int(value)
+        guard let index else { throw errors[0]  }
+        guard index > 0 && index <= self.count else { throw errors[1] }
+        return
+    }
+
 }

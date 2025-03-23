@@ -24,6 +24,7 @@ final class Node<T> {
 final class LinkedList<T> {
     private var head: Node<T>?
     private var tail: Node<T>?
+    private var length: Int
 
     var begin: Node<T>? {
         return head
@@ -33,13 +34,19 @@ final class LinkedList<T> {
         return tail
     }
     
-    var isEmpty: Bool {
+    var count: Int {
+        guard !isEmpty else { return 0 }
+        return length
+    }
+
+    private var isEmpty: Bool {
         return head == nil
     }
     
     init() {
         self.head = nil
         self.tail = nil
+        self.length = 0
     }
 }
 
@@ -52,6 +59,7 @@ extension LinkedList {
         if tail == nil {
             tail = head
         }
+        length += 1
     }
 
     func dequeue() -> T? {
@@ -65,6 +73,7 @@ extension LinkedList {
             if tail == nil {
                 head = tail
             }
+            length -= 1
         }
         return value
     }
@@ -80,6 +89,7 @@ extension LinkedList {
             if head == nil {
                 tail = head
             }
+            length -= 1
         }
         return value
     }

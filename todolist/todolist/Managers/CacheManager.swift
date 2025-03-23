@@ -54,6 +54,10 @@ final class JSONFileManagerCache: Persistable {
 
 final class InMemoryCache: InLineCacheable {
     private var todoList: LinkedList<Todo> = LinkedList()
+    var count: Int {
+        todoList.count
+    }
+
     func save(todo: Todo) {
         todoList.enqueue(value: todo)
     }

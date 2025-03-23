@@ -18,14 +18,6 @@ final class App: MainLoop {
     private let shouldStripString: Bool
     private var todoManager: TodoDirecting
     
-    enum Commands: String {
-        case add
-        case list
-        case delete
-        case toggle
-        case exit
-    }
-    
     enum State {
         case running
         case stop
@@ -50,28 +42,37 @@ extension App {
                 let values = processInput(input: userInput)
                 let command = Commands(rawValue: values.command)
                 let value = values.value
-                switch command {
-                case .add:
-                    todoManager.addTodo(with: value)
-                case .list:
-                    list()
-                case .delete:
-                    if let index = Int(value) {
-                        todoManager.deleteTodo(atIndex: index)
+                do {
+                    try todoManager.processCommand(command: command,
+                                                   value: value)
+                    switch command {
+                    case .add:
+                        todoManager.addTodo(with: value)
+                    case .list:
+                        list()
+                    case .delete:
+                        if let index = Int(value) {
+                            todoManager.deleteTodo(atIndex: index)
+                        }
+                    case .toggle:
+                        if let index = Int(value) {
+                            todoManager.toggleCompletion(forTodoAtIndex: index)
+                        }
+                    case .exit:
+                        todoManager.saveTodos()
+                        state = .stop
+                    default:
+                        optionErroMessage()
                     }
-                case .toggle:
-                    if let index = Int(value) {
-                        todoManager.toggleCompletion(forTodoAtIndex: index)
+                } catch (let error) {
+                    if let error = error as? CommandError {
+                        displayMessage(for: error)
+                    } else {
+                        optionErroMessage()
                     }
-                case .exit:
-                    todoManager.saveTodos()
-                    state = .stop
-                default:
-                    erroMessage()
-                    
                 }
             } else {
-                erroMessage()
+                optionErroMessage()
             }
         } while state == .running
     }
@@ -79,18 +80,6 @@ extension App {
 
 
 extension App {
-    private func erroMessage() {
-        let errorMessage = """
-        The options are: \n"
-            -  📌) add [task name]
-            -  📝) list
-            -  🗑️) delete [task index]
-            -  🌟) toggle [task index]
-            -  ⛔) exit
-        """
-        print(errorMessage)
-    }
-    
     private func processInput(input: String) -> (command: String, value: String) {
         let split = input.components(separatedBy: " ")
         let command = String(split.first ?? "")
@@ -103,9 +92,45 @@ extension App {
             print("\(index) \(todo?.description ?? "")")
         }
     }
+}
+
+extension App {
+    private func optionErroMessage() {
+        let errorMessage = """
+        The options are: \n"
+            -  📌) add [task name]
+            -  📝) list
+            -  🗑️) delete [task index]
+            -  🌟) toggle [task index]
+            -  ⛔) exit
+        """
+        print(errorMessage)
+    }
     
-    private func processCommand(command: String, value: String) throws {
+    private func displayMessage(for error: CommandError) {
+        switch error {
+        case .notSupported:
+            print("The command entered is not supported, please use")
+            optionErroMessage()
+            
+        case .addEmptyString:
+            print("The add command receives a non empty string")
         
+        case .deleteIndexNaN:
+            print("The delete command receives an integer index")
+        
+        case .deleteIndexOutOfBounds:
+            print("The delete command receives an integer index between 1 and the total number of todos")
+            
+        case .toggleIndexNaN:
+            print("The toggle command receives an integer index")
+            
+        case .toggleIndexOutOfBounds:
+            print("The toggle command receives an integer index between 1 and the total number of todos")
+            
+        case .emptyList:
+            print("The to do list is empty, add some tasks using the command 📌: add [task name]")
+        }
     }
 }
 
