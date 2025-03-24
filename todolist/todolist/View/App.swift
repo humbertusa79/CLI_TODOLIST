@@ -34,6 +34,7 @@ final class App: MainLoop {
 
 extension App {
     func run() {
+        onboardingMessage()
         todoManager.loadTodos()
         repeat {
             print("enter a command:", terminator: " ")
@@ -61,6 +62,8 @@ extension App {
                     case .exit:
                         todoManager.saveTodos()
                         state = .stop
+                    case .help:
+                        onboardingMessage()
                     default:
                         optionErroMessage()
                     }
@@ -95,6 +98,20 @@ extension App {
 }
 
 extension App {
+    private func onboardingMessage() {
+        let onboardingMessage = """
+        Welcome to the To Do list program. 
+        To start type any of the following options:
+            -  📌) add [task name] : This option adds a new task to the to do list with the given name
+            -  📝) list : This option display all the current to do tasks in the list. Including their status done or not.
+            -  🗑️) delete [task index] : This option deletes a to do task in the given index from the list.
+            -  🌟) toggle [task index] : This option allows to mark a to do task in the given index as done or not.
+            -  ⛔) exit : This option quits the program, and saves in disk the current to do list. The list is re loaded on launching the program.
+            -  ☀️) help : this option displays this information.
+        """
+        print(onboardingMessage)
+    }
+    
     private func optionErroMessage() {
         let errorMessage = """
         The options are: \n"
@@ -103,6 +120,7 @@ extension App {
             -  🗑️) delete [task index]
             -  🌟) toggle [task index]
             -  ⛔) exit
+            -  ☀️) help
         """
         print(errorMessage)
     }

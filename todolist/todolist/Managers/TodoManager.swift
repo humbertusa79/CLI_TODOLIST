@@ -13,6 +13,7 @@ enum Commands: String {
     case delete
     case toggle
     case exit
+    case help
 }
 
 enum CommandError: Error {
@@ -98,7 +99,7 @@ extension TodoManager {
             
         case .list:
             guard self.count > 0 else { throw CommandError.emptyList }
-        case .exit:
+        case .exit, .help:
             break
         }
     }
