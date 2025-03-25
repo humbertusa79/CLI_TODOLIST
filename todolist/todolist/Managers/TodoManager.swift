@@ -28,10 +28,10 @@ enum CommandError: Error {
 
 protocol TodoDirecting {
     func listTodos(action: (Int, Todo?) -> Void)
-    func addTodo(with title: String)
+    func addTodo(with title: String) -> Bool
     func toggleCompletion(forTodoAtIndex index: Int)
     func deleteTodo(atIndex index: Int)
-    func saveTodos()
+    func saveTodos() -> Bool
     func loadTodos()
     func processCommand(command: Commands?, value: String) throws
     var count: Int { get }
@@ -52,9 +52,9 @@ extension TodoManager: TodoDirecting {
         inMemoryCache.load()?.traverse(perform: action)
     }
     
-    func addTodo(with title: String) {
+    func addTodo(with title: String) -> Bool {
         let todo = Todo(id: UUID(), title: title, isCompleted: false)
-        inMemoryCache.save(todo: todo)
+        return inMemoryCache.save(todo: todo)
     }
     
     func toggleCompletion(forTodoAtIndex index: Int) {
@@ -67,9 +67,9 @@ extension TodoManager: TodoDirecting {
         inMemoryCache.load()?.deleteNodeAt(index: index)
     }
     
-    func saveTodos() {
-        guard let todos = inMemoryCache.load() else { return }
-        fileCache.save(todos: todos)
+    func saveTodos() -> Bool {
+        guard let todos = inMemoryCache.load() else { return  false }
+        return fileCache.save(todos: todos)
     }
     
     func loadTodos() {

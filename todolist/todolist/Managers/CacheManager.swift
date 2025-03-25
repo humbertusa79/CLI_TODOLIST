@@ -7,18 +7,22 @@
 
 import Foundation
 
+enum CacheError {
+    case unableToSaveData
+}
+
 protocol InLineCacheable {
-    func save(todo: Todo)
+    func save(todo: Todo) -> Bool
     func load() -> LinkedList<Todo>?
 }
 
 protocol Persistable {
-    func save(todos: LinkedList<Todo>)
+    func save(todos: LinkedList<Todo>) -> Bool
     func load() -> LinkedList<Todo>?
 }
 
 final class JSONFileManagerCache: Persistable {
-    func save(todos: LinkedList<Todo>) {
+    func save(todos: LinkedList<Todo>) -> Bool {
         let encoder = JSONEncoder()
         do {
             var todosArray: [Todo] = []
@@ -30,8 +34,10 @@ final class JSONFileManagerCache: Persistable {
             let fileManager = FileManager.default
             let url = fileManager.homeDirectoryForCurrentUser.appending(component: "todolist")
             try data.write(to: url)
+            return true
         } catch (let error) {
             print("there was an error encoding the data \(error)")
+            return false
         }
     }
     
@@ -58,8 +64,10 @@ final class InMemoryCache: InLineCacheable {
         todoList.count
     }
 
-    func save(todo: Todo) {
+    func save(todo: Todo) -> Bool {
+        let count = todoList.count
         todoList.enqueue(value: todo)
+        return count < todoList.count
     }
     
     func load() -> LinkedList<Todo>? {

@@ -48,7 +48,9 @@ extension App {
                                                    value: value)
                     switch command {
                     case .add:
-                        todoManager.addTodo(with: value)
+                        if !todoManager.addTodo(with: value) {
+                            displayMessage(for: .unableToSaveData)
+                        }
                     case .list:
                         list()
                     case .delete:
@@ -60,7 +62,9 @@ extension App {
                             todoManager.toggleCompletion(forTodoAtIndex: index)
                         }
                     case .exit:
-                        todoManager.saveTodos()
+                        if(!todoManager.saveTodos()) {
+                            displayMessage(for: .unableToSaveData)
+                        }
                         state = .stop
                     case .help:
                         onboardingMessage()
@@ -123,6 +127,13 @@ extension App {
             -  ☀️) help
         """
         print(errorMessage)
+    }
+    
+    private func displayMessage(for error: CacheError) {
+        switch error {
+        case .unableToSaveData:
+            print("The program failed to dave the data please verify the file: todolist is not corrupted")
+        }
     }
     
     private func displayMessage(for error: CommandError) {
