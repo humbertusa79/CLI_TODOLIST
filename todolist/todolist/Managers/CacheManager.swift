@@ -75,6 +75,31 @@ final class InMemoryCache: InLineCacheable {
     }
 
     func load(todos: LinkedList<Todo>) {
-        self.todoList = todos
+        todoList = todos
     }
 }
+
+#if DEBUG
+extension InMemoryCache {
+    var testHandler: DebugHandler {
+        return DebugHandler(target: self)
+    }
+    
+    struct DebugHandler {
+        private var target: InMemoryCache
+        
+        fileprivate init(target: InMemoryCache) {
+            self.target = target
+        }
+        
+        var todoList: LinkedList<Todo> {
+            target.todoList
+        }
+        
+        func todoAtIndex(index: Int) -> Node<Todo>? {
+            target.todoList.nodeAt(index: index)
+        }
+    }
+}
+
+#endif

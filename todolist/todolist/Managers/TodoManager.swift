@@ -113,3 +113,23 @@ extension TodoManager {
     }
 
 }
+
+#if DEBUG
+extension TodoManager {
+    var testHandler: DebugHandler {
+        return DebugHandler(target: self)
+    }
+
+    struct DebugHandler {
+        let target: TodoManager
+        
+        fileprivate init(target: TodoManager) {
+            self.target = target
+        }
+        
+        var todoList: LinkedList<Todo> {
+            target.inMemoryCache.testHandler.todoList
+        }
+    }
+}
+#endif

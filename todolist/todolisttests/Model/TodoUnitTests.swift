@@ -37,6 +37,44 @@ final class TodoUnitTests: XCTestCase {
                             isCompleted: true)
         XCTAssertEqual(todo.description, "[✅] \(title)")
     }
+    
+    func testTodoManagerAddTodo() {
+        let todoManager = TodoManager()
+        XCTAssertEqual(todoManager.testHandler.todoList.count, 0)
+        let isSaved = todoManager.addTodo(with: "Task 1")
+        XCTAssertTrue(isSaved)
+        XCTAssertEqual(todoManager.count, 1)
+    }
+    
+    func testTodoManagerDeleteTodo() {
+        let todoManager = TodoManager()
+        XCTAssertEqual(todoManager.testHandler.todoList.count, 0)
+        let _ = todoManager.addTodo(with: "Task1")
+        XCTAssertEqual(todoManager.count, 1)
+        todoManager.deleteTodo(atIndex: 1)
+        XCTAssertEqual(todoManager.count, 0)
+    }
+    
+    func testTodoManagerToggleTodo() {
+        let todoManager = TodoManager()
+        let _ = todoManager.addTodo(with: "Task1")
+        let todo = todoManager.testHandler.todoList.nodeAt(index: 1)
+        guard let notCompleted = try? !XCTUnwrap(todo?.value.isCompleted) else {
+            XCTFail("could not find the to do task in the list")
+            return
+        }
+        
+        XCTAssertTrue(notCompleted)
+        todoManager.toggleCompletion(forTodoAtIndex: 1)
+        guard let completed = try? XCTUnwrap(todo?.value.isCompleted) else {
+            XCTFail("could not find the to do task in the list")
+            return
+        }
+
+        XCTAssertTrue(completed)
+        
+    }
+    
 }
 
 extension TodoUnitTests {
